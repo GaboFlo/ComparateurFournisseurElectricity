@@ -1,5 +1,6 @@
 [
     {
+        "provider": "EDF",
         "optionKey": "BASE",
         "optionName": "Base",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/tarif-bleu.html",
@@ -58,6 +59,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "HPHC",
         "optionName": "Heures Creuses",
         "offerType": "BLEU",
@@ -121,6 +123,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "WEEK_END",
         "optionName": "Week-end Base",
         "offerType": "ZEN",
@@ -185,6 +188,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "WEEK_END_HPHC",
         "optionName": "Week-end avec Heures Creuses",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-week-end.html",
@@ -254,6 +258,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "WEEK_END_PLUS_LUNDI",
         "optionName": "Week-end + Lundi",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-week-end-plus.html",
@@ -314,6 +319,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "WEEK_END_PLUS_MERCREDI",
         "optionName": "Week-end + Mercredi",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-week-end-plus.html",
@@ -374,6 +380,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "WEEK_END_PLUS_VENREDI",
         "optionName": "Week-end + Vendredi",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-week-end-plus.html",
@@ -434,6 +441,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "WEEK_END_PLUS_HPHC_LUNDI",
         "optionName": "Week-end + Lundi avec Heures Creuses",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-week-end-plus.html",
@@ -512,6 +520,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "WEEK_END_PLUS_HPHC_MERCREDI",
         "optionName": "Week-end + Mercredi avec Heures Creuses",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-week-end-plus.html",
@@ -590,6 +599,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "WEEK_END_PLUS_HPHC_VENDREDI",
         "optionName": "Week-end + Vendredi avec Heures Creuses",
         "offerType": "ZEN",
@@ -668,6 +678,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "FIXE_BASE",
         "optionName": "Fixe Base",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html",
@@ -726,6 +737,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "FIXE_HPHC",
         "optionName": "Fixe avec heures creuses",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-fixe.html",
@@ -789,6 +801,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "ONLINE_BASE",
         "optionName": "Online Base",
         "offerType": "ZEN",
@@ -847,6 +860,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "ONLINE_HPHC",
         "optionName": "Online Heures Creuses",
         "offerType": "ZEN",
@@ -910,6 +924,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "VERT_BASE",
         "optionName": "Electrique - Base",
         "offerType": "VERT",
@@ -968,6 +983,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "VERT_HPHC",
         "optionName": "Electrique - Heures Creuses",
         "offerType": "VERT",
@@ -1031,6 +1047,7 @@
         ]
     },
     {
+        "provider": "EDF",
         "optionKey": "BLEU_TEMPO",
         "optionName": "Tempo",
         "offerType": "BLEU",
@@ -1085,6 +1102,7 @@
         "overridingHpHcKey": "BLEU_TEMPO"
     },
     {
+        "provider": "EDF",
         "optionKey": "ZEN_FLEX",
         "optionName": "Flex",
         "link": "https://particulier.edf.fr/fr/accueil/electricite-gaz/zen-flex.html",
@@ -1141,5 +1159,247 @@
             }
         ],
         "overridingHpHcKey": "ZEN_FLEX"
+    },
+    {
+        "provider": "TotalEnergies",
+        "optionKey": "ECO_BASE",
+        "optionName": "Base",
+        "offerType": "Heures Eco",
+        "link": "https://www.totalenergies.fr/particuliers/electricite-et-gaz/grilles-tarifaires#c115104",
+        "subscriptions": [
+            {
+                "powerClass": 6,
+                "monthlyCost": 1372
+            },
+            {
+                "powerClass": 9,
+                "monthlyCost": 1727
+            },
+            {
+                "powerClass": 12,
+                "monthlyCost": 2086
+            },
+            {
+                "powerClass": 15,
+                "monthlyCost": 2420
+            },
+            {
+                "powerClass": 18,
+                "monthlyCost": 2781
+            },
+            {
+                "powerClass": 24,
+                "monthlyCost": 3523
+            },
+            {
+                "powerClass": 30,
+                "monthlyCost": 4269
+            },
+            {
+                "powerClass": 36,
+                "monthlyCost": 4923
+            }
+        ],
+        "mappings": [
+            {
+                "applicableDays": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                ],
+                "price": 2016
+            }
+        ]
+    },
+    {
+        "provider": "TotalEnergies",
+        "optionKey": "ECO_HPHC",
+        "optionName": "Heures Creuses",
+        "offerType": "Heures Eco",
+        "link": "https://www.totalenergies.fr/particuliers/electricite-et-gaz/grilles-tarifaires#c115104",
+        "subscriptions": [
+            {
+                "powerClass": 6,
+                "monthlyCost": 1404
+            },
+            {
+                "powerClass": 9,
+                "monthlyCost": 1801
+            },
+            {
+                "powerClass": 12,
+                "monthlyCost": 2213
+            },
+            {
+                "powerClass": 15,
+                "monthlyCost": 2571
+            },
+            {
+                "powerClass": 18,
+                "monthlyCost": 2874
+            },
+            {
+                "powerClass": 24,
+                "monthlyCost": 3623
+            },
+            {
+                "powerClass": 30,
+                "monthlyCost": 4300
+            },
+            {
+                "powerClass": 36,
+                "monthlyCost": 4997
+            }
+        ],
+        "mappings": [
+            {
+                "applicableDays": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                ],
+                "hpHcConfig": [
+                    {
+                        "price": 2146,
+                        "slotType": "HP"
+                    },
+                    {
+                        "price": 1696,
+                        "slotType": "HC"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "provider": "TotalEnergies",
+        "optionKey": "VERT_BASE",
+        "optionName": "Base",
+        "offerType": "Heures Vertes",
+        "link": "https://www.totalenergies.fr/particuliers/electricite-et-gaz/grilles-tarifaires#c115352",
+        "subscriptions": [
+            {
+                "powerClass": 3,
+                "monthlyCost": 1045
+            },
+            {
+                "powerClass": 6,
+                "monthlyCost": 1376
+            },
+            {
+                "powerClass": 9,
+                "monthlyCost": 1738
+            },
+            {
+                "powerClass": 12,
+                "monthlyCost": 2104
+            },
+            {
+                "powerClass": 15,
+                "monthlyCost": 2442
+            },
+            {
+                "powerClass": 18,
+                "monthlyCost": 2759
+            },
+            {
+                "powerClass": 24,
+                "monthlyCost": 3503
+            },
+            {
+                "powerClass": 30,
+                "monthlyCost": 4255
+            },
+            {
+                "powerClass": 36,
+                "monthlyCost": 4893
+            }
+        ],
+        "mappings": [
+            {
+                "applicableDays": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                ],
+                "price": 1989
+            }
+        ]
+    },
+    {
+        "provider": "TotalEnergies",
+        "optionKey": "VERT_HPHC",
+        "optionName": "Heures Creuses",
+        "offerType": "Heures Vertes",
+        "link": "https://www.totalenergies.fr/particuliers/electricite-et-gaz/grilles-tarifaires#c115352",
+        "subscriptions": [
+            {
+                "powerClass": 6,
+                "monthlyCost": 1415
+            },
+            {
+                "powerClass": 9,
+                "monthlyCost": 1791
+            },
+            {
+                "powerClass": 12,
+                "monthlyCost": 2155
+            },
+            {
+                "powerClass": 15,
+                "monthlyCost": 2494
+            },
+            {
+                "powerClass": 18,
+                "monthlyCost": 2847
+            },
+            {
+                "powerClass": 24,
+                "monthlyCost": 3593
+            },
+            {
+                "powerClass": 30,
+                "monthlyCost": 4251
+            },
+            {
+                "powerClass": 36,
+                "monthlyCost": 4933
+            }
+        ],
+        "mappings": [
+            {
+                "applicableDays": [
+                    0,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
+                    6
+                ],
+                "hpHcConfig": [
+                    {
+                        "price": 2118,
+                        "slotType": "HP"
+                    },
+                    {
+                        "price": 1675,
+                        "slotType": "HC"
+                    }
+                ]
+            }
+        ]
     }
 ]

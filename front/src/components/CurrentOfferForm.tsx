@@ -32,23 +32,46 @@ import {
   OptionKey,
   PowerClass,
   PriceMappingFile,
+  Provider,
 } from "../types";
 import HpHcSlotSelector from "./HpHcSelector";
 
 const powerClasses: PowerClass[] = [6, 9, 12, 15, 18, 24, 30, 36];
 
-const getDistinctOfferTypes = (mapping: PriceMappingFile) => {
-  const offerTypes = new Set(mapping.map((item) => item.offerType));
+const getDistinctOfferTypes = (
+  mapping: PriceMappingFile,
+  provider: Provider
+) => {
+  const offerTypes = new Set(
+    mapping.filter((o) => o.provider === provider).map((item) => item.offerType)
+  );
   return Array.from(offerTypes);
+};
+
+const getDisctinctProviders = (mapping: PriceMappingFile) => {
+  const providers = new Set(mapping.map((item) => item.provider));
+  return Array.from(providers);
+};
+
+export const getAvailableOfferForProvider = (
+  mapping: PriceMappingFile,
+  provider: Provider
+): OfferType[] => {
+  if (!provider) return [];
+  const availableOffers = mapping
+    .filter((item) => item.provider === provider)
+    .map((item) => item.offerType);
+  return Array.from(new Set(availableOffers));
 };
 
 export const getAvailableOptionsForOffer = (
   mapping: PriceMappingFile,
+  provider: Provider,
   offerType: OfferType
 ): Option[] => {
-  if (!offerType) return [];
+  if (!offerType || !provider) return [];
   const availableOptions = mapping.filter(
-    (item) => item.offerType === offerType
+    (item) => item.offerType === offerType && item.provider === provider
   );
   return availableOptions;
 };
@@ -76,26 +99,52 @@ export default function CurrentOfferForm({ handleNext }: Readonly<Props>) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getLinkForOffer = (offerType: OfferType, optionKey: OptionKey | "") => {
+  const getLinkForOffer = (
+    provider: Provider,
+    offerType: OfferType,
+    optionKey: OptionKey | ""
+  ) => {
     return allOffers?.find((o) => {
-      return o.offerType === offerType && o.optionKey === optionKey;
+      return (
+        o.provider === provider &&
+        o.offerType === offerType &&
+        o.optionKey === optionKey
+      );
     })?.link;
   };
 
   const handleChange = (event: SelectChangeEvent<string | number>) => {
     const { name, value } = event.target;
+    const valueString = value.toString();
     setFormState((prevState) => {
       const newState = { ...prevState, [name]: value };
-      if (name === "offerType" && value !== prevState.offerType && allOffers) {
+      if (name === "provider" && value !== prevState.provider && allOffers) {
+        const offerType = getAvailableOfferForProvider(
+          allOffers,
+          valueString as Provider
+        )[0];
+        newState.offerType = offerType;
         newState.optionType = getAvailableOptionsForOffer(
           allOffers,
+          valueString as Provider,
+          offerType
+        )[0].optionKey;
+      }
+      if (
+        name === "offerType" &&
+        valueString !== prevState.offerType &&
+        allOffers
+      ) {
+        newState.optionType = getAvailableOptionsForOffer(
+          allOffers,
+          newState.provider,
           newState.offerType
         )[0].optionKey;
       }
       trackEvent({
         category: "form-change",
         action: name,
-        name: value.toString(),
+        name: valueString,
       });
 
       return newState;
@@ -124,21 +173,28 @@ export default function CurrentOfferForm({ handleNext }: Readonly<Props>) {
           <FormControl fullWidth sx={{ marginY: 1 }}>
             <FormLabel required>Fournisseur actuel</FormLabel>
             <Select
-              id="supplier"
-              name="supplier"
+              id="provider"
+              name="provider"
               type="name"
               required
-              value={formState.supplier}
+              value={formState.provider}
               onChange={handleChange}
-              disabled
               sx={{ height: "55px" }}
             >
-              <MenuItem value="EDF">
-                <ListItemIcon sx={{ marginRight: 1 }}>
-                  <img src="/edf.png" alt="EDF" width="24" height="24" />
-                </ListItemIcon>
-                <ListItemText primary="EDF" />
-              </MenuItem>
+              {allOffers &&
+                getDisctinctProviders(allOffers).map((provider) => (
+                  <MenuItem key={provider} value={provider}>
+                    <ListItemIcon sx={{ marginRight: 1 }}>
+                      <img
+                        src={`/${provider}.png`}
+                        alt={provider}
+                        width="24"
+                        height="24"
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={provider} />
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>{" "}
           <FormControl fullWidth sx={{ marginY: 1 }}>
@@ -152,23 +208,25 @@ export default function CurrentOfferForm({ handleNext }: Readonly<Props>) {
               disabled={!formState.offerType || !allOffers}
             >
               {allOffers &&
-                getAvailableOptionsForOffer(allOffers, formState.offerType).map(
-                  (option) => (
-                    <MenuItem key={option.optionKey} value={option.optionKey}>
-                      {option.optionName}
-                      {option.overridingHpHcKey && (
-                        <AccessTimeFilledIcon
-                          sx={{
-                            fontSize: "1rem",
-                            verticalAlign: "middle",
-                            color: "orange",
-                            ml: 1,
-                          }}
-                        />
-                      )}
-                    </MenuItem>
-                  )
-                )}
+                getAvailableOptionsForOffer(
+                  allOffers,
+                  formState.provider,
+                  formState.offerType
+                ).map((option) => (
+                  <MenuItem key={option.optionKey} value={option.optionKey}>
+                    {option.optionName}
+                    {option.overridingHpHcKey && (
+                      <AccessTimeFilledIcon
+                        sx={{
+                          fontSize: "1rem",
+                          verticalAlign: "middle",
+                          color: "orange",
+                          ml: 1,
+                        }}
+                      />
+                    )}
+                  </MenuItem>
+                ))}
             </Select>
             <Typography
               sx={{ p: 1, fontWeight: "small" }}
@@ -177,6 +235,7 @@ export default function CurrentOfferForm({ handleNext }: Readonly<Props>) {
             >
               <Link
                 href={getLinkForOffer(
+                  formState.provider,
                   formState.offerType,
                   formState.optionType
                 )}
@@ -205,11 +264,13 @@ export default function CurrentOfferForm({ handleNext }: Readonly<Props>) {
               {!allOffers ? (
                 <CircularProgress />
               ) : (
-                getDistinctOfferTypes(allOffers).map((value) => (
-                  <MenuItem key={value} value={value}>
-                    {value}
-                  </MenuItem>
-                ))
+                getDistinctOfferTypes(allOffers, formState.provider).map(
+                  (value) => (
+                    <MenuItem key={value} value={value}>
+                      {value}
+                    </MenuItem>
+                  )
+                )
               )}
             </Select>
           </FormControl>

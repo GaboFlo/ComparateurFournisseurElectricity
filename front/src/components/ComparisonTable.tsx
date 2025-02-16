@@ -152,7 +152,7 @@ export function ComparisonTable() {
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>
               <TableRow>
-                <StyledTableCell align="center">Fournisseur</StyledTableCell>
+                <StyledTableCell align="center">Fournisseur </StyledTableCell>
                 <StyledTableCell align="center">Offre</StyledTableCell>
                 <StyledTableCell align="center">Option</StyledTableCell>
                 <StyledTableCell align="center">
@@ -183,6 +183,12 @@ export function ComparisonTable() {
                     }
                   >
                     <StyledTableCell align="center">
+                      <img
+                        src={`/${row.provider}.png`}
+                        alt={row.provider}
+                        width="24"
+                        height="24"
+                      />{" "}
                       {row.provider}
                     </StyledTableCell>
                     <StyledTableCell align="center">

@@ -13,6 +13,7 @@ import {
   OptionKey,
   PowerClass,
   PriceMappingFile,
+  Provider,
   Season,
   SlotType,
   TempoDates,
@@ -89,11 +90,16 @@ export function getSeason(date: Date) {
 export function findMonthlySubscriptionCost(
   powerClass: PowerClass,
   offerType: OfferType,
-  optionKey: OptionKey
+  optionKey: OptionKey,
+  provider: Provider
 ) {
   const priceMappingData = price_mapping as PriceMappingFile;
   for (const elt of priceMappingData) {
-    if (elt.offerType === offerType && elt.optionKey === optionKey) {
+    if (
+      elt.offerType === offerType &&
+      elt.optionKey === optionKey &&
+      elt.provider === provider
+    ) {
       for (const sub of elt.subscriptions) {
         if (sub.powerClass === powerClass) {
           return sub.monthlyCost;

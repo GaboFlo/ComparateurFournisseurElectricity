@@ -15,6 +15,7 @@ import {
   OverridingHpHcKey,
   PowerClass,
   PriceMappingFile,
+  Provider,
   SlotType,
   TempoCodeDay,
   TempoDates,
@@ -140,16 +141,21 @@ export async function calculatePrices({
   optionKey,
   offerType,
   hpHcData,
+  provider,
 }: {
   data: CalculatedData[];
   optionKey: OptionKey;
   offerType: OfferType;
   tempoDates?: TempoDates;
   hpHcData: HpHcSlot[];
+  provider: Provider;
 }): Promise<FullCalculatedData> {
   const priceMappingData = price_mapping as PriceMappingFile;
   const option = priceMappingData.find(
-    (item) => item.optionKey === optionKey && item.offerType === offerType
+    (item) =>
+      item.optionKey === optionKey &&
+      item.offerType === offerType &&
+      item.provider === provider
   );
   if (!option) {
     throw new Error(`No option found ${offerType}-${optionKey}`);
@@ -221,6 +227,7 @@ interface FullCalculatePricesInterface {
   link: string;
   hpHcData: HpHcSlot[];
   overridingHpHcKey?: OverridingHpHcKey;
+  provider: Provider;
 }
 
 export async function calculateRowSummary({
@@ -232,6 +239,7 @@ export async function calculateRowSummary({
   link,
   offerType,
   hpHcData,
+  provider,
   overridingHpHcKey,
 }: FullCalculatePricesInterface): Promise<ComparisonTableInterfaceRow> {
   const calculatedData = await calculatePrices({
@@ -239,12 +247,14 @@ export async function calculateRowSummary({
     offerType,
     optionKey,
     hpHcData,
+    provider,
   });
 
   const monthlyCost = findMonthlySubscriptionCost(
     powerClass,
     offerType,
-    optionKey
+    optionKey,
+    provider
   );
 
   const fullSubscriptionCost = Math.round(
@@ -252,7 +262,7 @@ export async function calculateRowSummary({
   );
 
   return {
-    provider: "EDF",
+    provider,
     offerType,
     optionKey,
     optionName,

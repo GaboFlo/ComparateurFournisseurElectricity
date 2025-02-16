@@ -11,13 +11,12 @@ import {
   OfferType,
   OptionKey,
   PowerClass,
+  Provider,
   SeasonHourlyAnalysis,
 } from "../types";
 
-type AvailableSuppliers = "EDF";
-
 interface FormState {
-  supplier: AvailableSuppliers;
+  provider: Provider;
   offerType: OfferType;
   optionType: OptionKey | "";
   powerClass: PowerClass;
@@ -54,7 +53,7 @@ export const FormProvider: React.FC<FormProviderProps> = ({ children }) => {
   const lastYearStart = startOfDay(subYears(new Date(), 1));
   const lastYearEnd = endOfDay(new Date());
   const [formState, setFormState] = useState<FormState>({
-    supplier: "EDF",
+    provider: "EDF",
     offerType: OfferType.BLEU,
     optionType: OptionKey.BASE,
     powerClass: 6,

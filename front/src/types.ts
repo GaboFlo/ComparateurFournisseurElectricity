@@ -50,8 +50,12 @@ export interface Mapping {
   hpHcConfig?: HpHcConfigParent[];
   include_holidays?: boolean;
 }
+
+export type Provider = "EDF" | "TotalEnergies" | "Engie";
+
 export interface Option {
   optionKey: OptionKey;
+  provider: Provider;
   optionName: string;
   link: string;
   offerType: OfferType;
@@ -66,7 +70,7 @@ export interface Subscription {
 }
 
 export interface ComparisonTableInterfaceRow {
-  provider: "EDF";
+  provider: Provider;
   offerType: OfferType;
   optionKey: OptionKey;
   optionName: string;

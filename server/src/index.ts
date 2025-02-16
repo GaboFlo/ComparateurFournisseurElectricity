@@ -221,6 +221,7 @@ app.get(
           optionKey: option.optionKey,
           offerType: option.offerType,
           optionName: option.optionName,
+          provider: option.provider,
           link: option.link,
           hpHcData: defaultHpHcData,
           overridingHpHcKey: option.overridingHpHcKey,
